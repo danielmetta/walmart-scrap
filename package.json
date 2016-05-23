@@ -1,0 +1,35 @@
+{
+  "name": "walmart-scrap",
+  "description": "Consulta dados do produto Walmart",
+  "version": "1.0.1ove",
+  "readmeFilename": "README.md",
+  "keywords": [
+    "walmart",
+    "scrap",
+    "web scrap"
+  ],
+  "tags": [
+    "scrap",
+    "walmart",
+    "web"
+  ],
+  "author": {
+    "name": "Daniel Metta",
+    "email": "info@danielmetta.com.br",
+    "homepage": "http://www.danielmetta.com.br"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielmetta/walmart-scrap/index.js"
+  },
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "es6-promise": "^3.2.1",
+    "request": "^2.72.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "main": "index.js"
+}
