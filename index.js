@@ -1,5 +1,6 @@
 'use strict';
 require('es6-promise').polyfill();
+var _ = require('underscore');
 var request = require('request')
 var cheerio = require('cheerio');
 
@@ -15,7 +16,7 @@ exports.product = function(url) {
       if(!error) {
         var $ = cheerio.load(html),
         product = {};
-        product.productSku = $('.wishlist-container').children('button').attr('data-sku');
+        product.productId = $('.wishlist-container').children('button').attr('data-product');
         product.title = $('.product-title-header').children('h1[itemprop=name]').text();
         product.price = $('.product-price').attr('data-sellprice');
         product.image = $('.main-picture-wrapper').children('img').attr('src');
@@ -23,6 +24,39 @@ exports.product = function(url) {
       } else {
         error({ error:"Cannot get product" });
       }
+    });
+  });
+};
+
+exports.listProducts = function(lstUrl) {
+  return new Promise(function(acept, error) {
+    const lst = [];
+
+    var done = _.after(lstUrl.length, function () {
+      acept(lst);
+    });
+    //
+    if(lstUrl.length == 0) done();
+
+    lstUrl.forEach(function(p) {
+      var options = {
+        url: p,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+        }
+      };
+      request(options, function(error, response, html) {
+        if(!error) {
+          var $ = cheerio.load(html),
+          product = {};
+          product.productId = $('.wishlist-container').children('button').attr('data-product');
+          product.title = $('.product-title-header').children('h1[itemprop=name]').text();
+          product.price = $('.product-price').attr('data-sellprice');
+          product.image = $('.main-picture-wrapper').children('img').attr('src');
+          lst.push(product);
+        }
+        done();
+      });
     });
   });
 };

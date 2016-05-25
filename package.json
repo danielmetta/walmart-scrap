@@ -1,7 +1,7 @@
 {
   "name": "walmart-scrap",
   "description": "Consulta dados do produto Walmart",
-  "version": "1.0.1ove",
+  "version": "1.0.5",
   "readmeFilename": "README.md",
   "keywords": [
     "walmart",
@@ -25,7 +25,8 @@
   "dependencies": {
     "cheerio": "^0.20.0",
     "es6-promise": "^3.2.1",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "underscore": "^1.8.3"
   },
   "license": "MIT",
   "engines": {
